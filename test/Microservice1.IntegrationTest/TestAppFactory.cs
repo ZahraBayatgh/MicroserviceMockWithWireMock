@@ -18,7 +18,7 @@ namespace Microservice1.IntegrationTest
             {
                 configurationBuilder.AddInMemoryCollection(new KeyValuePair<string, string>[]
                 {
-                    new("URL:MicroService2", wiremockServer.Urls[0])
+                    new("URL:BaseAddress", wiremockServer.Urls[0])
                 });
             }).ConfigureServices(collection => collection.AddSingleton(wiremockServer));
         }

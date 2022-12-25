@@ -11,7 +11,7 @@ namespace Microservice1.Controllers
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public WeatherForecastController(IHttpClientFactory httpClientFactory )
+        public WeatherForecastController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
@@ -21,13 +21,15 @@ namespace Microservice1.Controllers
         {
             HttpClient client = _httpClientFactory.CreateClient("Test");
             var response = await client.GetAsync($"/WeatherForecast");
-           
-            if (response.StatusCode == HttpStatusCode.Forbidden)
-                return BadRequest();
-           
-            var responseBody = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<List<WeatherForecast>>(responseBody);
-            return Ok(result);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                var responseBody = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<List<WeatherForecast>>(responseBody);
+                return Ok(result);
+            }
+            return BadRequest();
+
         }
     }
 }

@@ -11,7 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient("Test", httpClient =>
 {
-    httpClient.BaseAddress = new Uri(config.GetValue<string>("URL:MicroService2"));
+    httpClient.BaseAddress = new Uri(config.GetValue<string>("URL:BaseAddress"));
 });
 var app = builder.Build();
 
